@@ -2,11 +2,11 @@
 
 3 options for [AVS internet connectivity] (https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-design-public-internet-access):
 
-- **via an AzFW or NVA already hosted in Azure**
+1. **via an AzFW or NVA already hosted in Azure**
 
-- Via [public IP at NSX-T level](https://learn.microsoft.com/en-us/azure/azure-vmware/enable-public-ip-nsx-edge) (allowing to deploy a 3P NVA in the AVS environment)
+2. Via [public IP at NSX-T level](https://learn.microsoft.com/en-us/azure/azure-vmware/enable-public-ip-nsx-edge) (allowing to deploy a 3P NVA in the AVS environment)
 
-- Via [AVS managed SNAT solution](https://learn.microsoft.com/en-us/azure/azure-vmware/enable-managed-snat-for-workloads) (SNAT through an AVS NAT GW) 
+3. Via [AVS managed SNAT solution](https://learn.microsoft.com/en-us/azure/azure-vmware/enable-managed-snat-for-workloads) (SNAT through an AVS NAT GW) 
 
 
 This repo is about option 1.
