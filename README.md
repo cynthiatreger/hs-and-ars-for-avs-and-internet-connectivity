@@ -13,6 +13,6 @@ This repo is about option 1.
 
 <img width="1164" alt="image" src="https://user-images.githubusercontent.com/110976272/217469277-4172cd03-7fe8-4c2b-ae0d-75ff37a875a1.png">
 
-- Disabling *GW route propagation* on a subnet removes the routes programmed by ARS on that subnet :arrow_right: the default route to the FW needs to be enforced with a UDR on the Spokes
+:arrow_right: Disabling *GW route propagation* on a subnet removes the routes programmed by ARS on that subnet: the default route to the FW needs to be enforced with a UDR on the Spokes
 
-- VNET peering routes are preferred over ARS propagated routes (even if ARS routes are more specific) :arrow_right: UDRs on the GW subnet are required to force the traffic to the Spoke VNETs through the FW
+:arrow_right: VNET peering routes are preferred over ARS propagated routes (even if ARS routes are more specific): UDRs on the GW subnet are required to force the traffic to the Spoke VNETs through the FW
