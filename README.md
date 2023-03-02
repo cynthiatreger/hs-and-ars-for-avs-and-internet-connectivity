@@ -8,11 +8,25 @@
 
 3. Via [AVS managed SNAT solution](https://learn.microsoft.com/en-us/azure/azure-vmware/enable-managed-snat-for-workloads) (SNAT through an AVS NAT GW) 
 
-
 This repo is about option 1.
 
-<img width="1164" alt="image" src="https://user-images.githubusercontent.com/110976272/217469277-4172cd03-7fe8-4c2b-ae0d-75ff37a875a1.png">
+# 1. Single Hub VNET for AVS and On-Prem connectivity
+
+All the flows are sent via the FW: Spoke to Spoke, On-Prem to Spokes and Spoke to AVS. 
+
+On-Prem to AVS is managed via Global Reach.
+
+<img width="1156" alt="image" src="https://user-images.githubusercontent.com/110976272/222504152-7c9e27c0-bd4b-4488-a46c-ef21af09f46e.png">
 
 :arrow_right: Disabling *GW route propagation* on a subnet removes the routes programmed by ARS on that subnet: the default route to the FW needs to be enforced with a UDR on the Spokes
 
 :arrow_right: VNET peering routes are preferred over ARS propagated routes (even if ARS routes are more specific): UDRs on the GW subnet are required to force the traffic to the Spoke VNETs through the FW
+
+# 2. Hub & Spoke & dedicated AVS Transit VNET for AVS connectivity
+
+With this design FW inspection can be adjusted (ex: On-Prem <-> Spokes can go direct, Spokes <-> AVS is filtered)
+
+PROS: No UDRs
+
+CONS: dedicated AVS transit VNET inc 2nd ERGW, ARS, NVA
+
