@@ -1,6 +1,6 @@
 # NVA + ARS for AVS Internet connectivity
 
-3 options for [AVS internet connectivity] (https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-design-public-internet-access):
+3 options for [AVS internet connectivity](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-design-public-internet-access):
 
 1. **via an AzFW or NVA already hosted in Azure**
 
@@ -10,7 +10,7 @@
 
 This repo is about option 1.
 
-# 1. Single Hub VNET for AVS and On-Prem connectivity
+## 1. Single Hub VNET for AVS and On-Prem connectivity
 
 On-Prem to AVS is managed via Global Reach, with possibly an On-Prem FW for filtering/inspection.
 
@@ -24,7 +24,7 @@ All the other flows are sent through the FW: Spoke to Spoke, On-Prem to Spokes a
 
 :warning: Make sure to disable GW route propagation on the internet facing NIC of the FW, to avoid a routing loop.
 
-# 2. Hub & Spoke + dedicated AVS Transit VNET for AVS connectivity
+## 2. Hub & Spoke + dedicated AVS Transit VNET for AVS connectivity
 
 With this design FW inspection can be adjusted. Ex: On-Prem <-> Spokes can go direct, Spokes <-> AVS is filtered.
 
