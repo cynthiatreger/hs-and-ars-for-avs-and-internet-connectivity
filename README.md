@@ -1,6 +1,6 @@
 # NVA + ARS for AVS Internet connectivity
 
-3 options for [AVS internet connectivity](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-design-public-internet-access):
+There are 3 options for [AVS internet connectivity](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-design-public-internet-access):
 
 1. **via an AzFW or NVA already hosted in Azure**
 
@@ -9,6 +9,11 @@
 3. Via [AVS managed SNAT solution](https://learn.microsoft.com/en-us/azure/azure-vmware/enable-managed-snat-for-workloads) (SNAT through an AVS NAT GW) 
 
 This repo is about option 1.
+
+[1. SINGLE HUB VNET FOR AVS AND ON-PREM CONNECTIVITY](https://github.com/cynthiatreger/nva-ars-avs-internet#1-single-hub-vnet-for-avs-and-on-prem-connectivity)
+
+[2. HUB&SPOKE + DEDICATED AVS TRANSIT VNET FOR AVS CONNECTIVITY](https://github.com/cynthiatreger/nva-ars-avs-internet#2-hub--spoke--dedicated-avs-transit-vnet-for-avs-connectivity)
+##
 
 ## 1. Single Hub VNET for AVS and On-Prem connectivity
 
@@ -32,7 +37,7 @@ With this design FW inspection can be adjusted. Ex: On-Prem <-> Spokes can go di
 
 Just like in the scenario above, On-Prem to AVS transit can be achieved in case Global Reach is not available.
 
-:heavy_plus_sign: No UDRs.
+:heavy_plus_sign: Limited need of UDRs/No UDRs.
 
 :heavy_minus_sign: Additional infrastructure required: a dedicated AVS transit VNET, a 2nd ERGW, a 2nd ARS and a 2nd NVA.
 
@@ -47,6 +52,10 @@ ARS1 will:
 ARS2 will:
 1. propagate the default route + the On-Prem + the H&S VNET ranges to AVS
 2. advertise the AVS range to the AVS NVA
+
+2 options for the FW NVA to AVS NVA transit:
+1. UDRs
+2. BGP over IPSec/VxLAN
 
 For reasons already discussed in another [article](https://github.com/cynthiatreger/az-routing-guide-ep5-nva-routing-2-0#532-chained-nvas-ars-and-vxlan) the eBGP session between the FW NVA and the AVS NVA is established within a VxLAN or IPSec tunnel:
 1. the FW NVA advertises the default route, the On-Prem prefixes and the Hub & spoke ranges to the AVS NVA
