@@ -12,9 +12,11 @@ This repo is about option 1.
 
 ## 1. Single Hub VNET for AVS and On-Prem connectivity
 
-On-Prem to AVS is managed via Global Reach, with possibly an On-Prem FW for filtering/inspection.
+On-Prem to AVS is managed via Global Reach when available*, with an On-Prem FW for filtering/inspection if needed.
 
 All the other flows are sent through the FW: Spoke to Spoke, On-Prem to Spokes and Spoke to AVS. 
+
+\* *this design can offer On-Prem to AVS transit should GR not be available*
 
 <img width="1156" alt="image" src="https://user-images.githubusercontent.com/110976272/222504152-7c9e27c0-bd4b-4488-a46c-ef21af09f46e.png">
 
@@ -28,11 +30,13 @@ All the other flows are sent through the FW: Spoke to Spoke, On-Prem to Spokes a
 
 With this design FW inspection can be adjusted. Ex: On-Prem <-> Spokes can go direct, Spokes <-> AVS is filtered.
 
-:heavy_plus_sign: No UDRs, No Global Reach.
+Just like in the scenario above, On-Prem to AVS transit can be achieved in case Global Reach is not available.
+
+:heavy_plus_sign: No UDRs.
 
 :heavy_minus_sign: Additional infrastructure required: a dedicated AVS transit VNET, a 2nd ERGW, a 2nd ARS and a 2nd NVA.
 
-<img width="1068" alt="image" src="https://user-images.githubusercontent.com/110976272/222540830-bc3fe588-c6d1-44cb-859f-f75559c7c02d.png">
+<img width="1092" alt="image" src="https://user-images.githubusercontent.com/110976272/222674995-f9d636b9-693f-477c-b551-dd5db8af3ffb.png">
 
 ARS1 will:
 1. propagate the default route learnt from the FW NVA + the AVS range forwarded by the AVS NVA
@@ -48,6 +52,6 @@ For reasons already discussed in another [article](https://github.com/cynthiatre
 1. the FW NVA advertises the default route, the On-Prem prefixes and the Hub & spoke ranges to the AVS NVA
 2. The AVS NVA advertises the ABS range to the FW NVA
 
-:arrow_right: The FW being stateful, its instances should be configured as Active/Standby to avoid asymmetric routing. If deployed as Active/Active indtances, the [Next-Hop IP feature](https://learn.microsoft.com/en-us/azure/route-server/next-hop-ip) should be used on the peering with ARS1 to set the next hop to reach both NVA instances as the IP address of their frontend internal load balancer.
+:arrow_right: If stateful, the NVA instances should be configured as Active/Standby to avoid asymmetric routing. 
 
 :warning: Make sure to disable GW route propagation on the internet facing NIC of the FW, to avoid a routing loop.
