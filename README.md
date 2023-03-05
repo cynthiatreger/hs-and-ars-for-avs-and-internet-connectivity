@@ -23,7 +23,7 @@ All the other flows are sent through the FW: Spoke to Spoke, On-Prem to Spokes a
 
 \* *this design can offer On-Prem to AVS transit should GR not be available*
 
-<img width="1156" alt="image" src="https://user-images.githubusercontent.com/110976272/222504152-7c9e27c0-bd4b-4488-a46c-ef21af09f46e.png">
+<img width="1158" alt="image" src="https://user-images.githubusercontent.com/110976272/222985791-8401aefa-6036-47cc-bff4-98cb81363b61.png">
 
 :arrow_right: Disabling *GW route propagation* on a subnet removes the routes programmed by ARS on that subnet: the default route to the FW needs to be enforced with a UDR on the Spokes
 
@@ -41,7 +41,7 @@ Just like in the scenario above, On-Prem to AVS transit can be achieved in case 
 
 :heavy_minus_sign: Additional infrastructure required: a dedicated AVS transit VNET, a 2nd ERGW, a 2nd ARS and a 2nd NVA.
 
-<img width="1092" alt="image" src="https://user-images.githubusercontent.com/110976272/222674995-f9d636b9-693f-477c-b551-dd5db8af3ffb.png">
+<img width="1172" alt="image" src="https://user-images.githubusercontent.com/110976272/222985733-263e9377-cd81-44f9-b67e-e4a872252416.png">
 
 ARS1 will:
 1. propagate the default route learnt from the FW NVA + the AVS range forwarded by the AVS NVA
@@ -63,4 +63,4 @@ For reasons already discussed in another [article](https://github.com/cynthiatre
 
 :arrow_right: If stateful, the NVA instances should be configured as Active/Standby to avoid asymmetric routing. 
 
-:warning: Make sure to disable GW route propagation on the internet facing NIC of the FW, to avoid a routing loop.
+:warning: Make sure to disable GW route propagation on the FW NIC providing internet connectivity, to avoid a routing loop.
