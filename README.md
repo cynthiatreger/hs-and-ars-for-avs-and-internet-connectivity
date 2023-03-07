@@ -66,13 +66,13 @@ When Global Reach is not available, Transit can be achieved via the FW in the Hu
 
 This design is also detailed in this [Adam video](https://youtu.be/8CPghVFIR9Q?t=335).
 
-**FW NVA design:**
+### FW NVA design:
 
 <img width="873" alt="image" src="https://user-images.githubusercontent.com/110976272/223527462-e6b085ff-e988-431f-b4d4-c54d9e908d09.png">
 
-**Azure FW design:**
+### Azure FW design:
 
-diagram
+<img width="866" alt="image" src="https://user-images.githubusercontent.com/110976272/223563152-1afdd727-1907-4ecb-9471-f0b08e0b13d1.png">
 
 # 2. Hub VNET + AVS Transit VNET design
 
@@ -86,7 +86,7 @@ This design provides On-Prem to AVS transit capalitites by default. However, whe
 
 ## 2.1. HUB VNET + AVS TRANSIT VNET and NVAs
 
-<img width="1127" alt="image" src="https://user-images.githubusercontent.com/110976272/223508772-23bbbb98-d6ff-404a-90d9-3a4440954c65.png">
+<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/223564064-2c06b8a4-8da6-4299-85fb-2c08d434c3af.png">
 
 | resource | actions |
 | - | - |
@@ -114,7 +114,7 @@ For reasons already discussed in a previous [article](https://github.com/cynthia
 
 This design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach) and is useful when the FW doesn't speak BGP, like the Azure Firewall.
 
-<img width="1132" alt="image" src="https://user-images.githubusercontent.com/110976272/223506157-87c702de-4a70-453f-83ae-a98178b93c46.png">
+<img width="1132" alt="image" src="https://user-images.githubusercontent.com/110976272/223564401-30198cff-c42c-402b-bad0-a0041f29519c.png">
 
 | resource | actions |
 | - | - |
