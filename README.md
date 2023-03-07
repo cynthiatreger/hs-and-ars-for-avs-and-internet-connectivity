@@ -1,5 +1,7 @@
 # Transit and Internet connectivity for AVS with ARS
 
+This article aims at summarising the sets of designs available for AVS connectivity filtered by a Firewall (3P FW or Azure Firewall), also providing internet breakout, in a Hub and Spoke topology.
+
 There are 3 options for [AVS internet connectivity](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-design-public-internet-access):
 
 1. **via an AzFW or NVA already hosted in Azure**
@@ -8,21 +10,21 @@ There are 3 options for [AVS internet connectivity](https://learn.microsoft.com/
 
 3. Via [AVS managed SNAT solution](https://learn.microsoft.com/en-us/azure/azure-vmware/enable-managed-snat-for-workloads) (SNAT through an AVS NAT GW) 
 
-This repo is about summarising the 2 sets of designs available for option 1 in a Hub & Spoke topology.
+This repo is about option 1.
 
-[1. SINGLE HUB VNET DESIGN]
+[1. SINGLE HUB VNET DESIGN](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#1-single-hub-vnet-design)
 
-&emsp;[1.1. SINGLE HUB VNET and FW NVA]
+&emsp;[1.1. SINGLE HUB VNET and FW NVA](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#11-single-hub-vnet-and-fw-nva)
 
-&emsp;[1.2. SINGLE HUB VNET and Azure Firewall]
+&emsp;[1.2. SINGLE HUB VNET and Azure Firewall](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#12-single-hub-vnet-and-azure-firewall)
 
-&emsp;[1.3. Transit without Global Reach]
+&emsp;[1.3. Transit without Global Reach](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#13-single-hub-vnet-without-global-reach)
 
-[2. HUB VNET + AVS TRANSIT VNET DESIGN]
+[2. HUB VNET + AVS TRANSIT VNET DESIGN](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#2-hub-vnet--avs-transit-vnet-design)
 
-&emsp;[2.1. HUB VNET, AVS TRANSIT VNET and NVAs]
+&emsp;[2.1. HUB VNET, AVS TRANSIT VNET and NVAs](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#21-hub-vnet--avs-transit-vnet-and-nvas)
 
-&emsp;[2.2. HUB VNET, AVS TRANSIT VNET and Azure Firewall]
+&emsp;[2.2. HUB VNET, AVS TRANSIT VNET and Azure Firewall](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#22-hub-vnet-avs-transit-vnet-and-azure-firewall)
 ##
 # 1. Single Hub VNET design
 
@@ -95,25 +97,6 @@ This design provides On-Prem to AVS transit capalitites by default. However, whe
 
 :arrow_right: Internet connectivity can be provided either by the FW NIC facing the AVS NVA or a 3rd dedicated NIC on the FW NVA. GW route propagation should be disabled for that NIC.
 
-The FW NVA will:
-1. originate and advertise the default route 
-2. forward the AVS ranges to ARS1
-3. forward the On-Prem and H&S VNET ranges to the AVS NVA
-
-The AVS NVA will: 
-1. advertise the AVS ranges to the FW NVA
-2. forward the On-Prem and H&S VNET ranges to ARS2
-
-ARS1 will:
-1. propagate the default route learnt from the FW NVA + the AVS ranges forwarded by the AVS NVA via the FW NVA:
-    - to the On-Prem over ER
-    - to the Spoke VNETs
-2. advertise the OnPrem + the hub and spoke VNET ranges to the FW NVA
-
-ARS2 will:
-1. propagate the default route + the On-Prem + the H&S VNET ranges to AVS
-2. advertise the AVS ranges to the AVS NVA
-
 2 options for the FW NVA to AVS NVA transit:
 1. UDRs 
     - on the FW NVA NIC to AVS VNET: AVS ranges to the AVS NVA NIC, 
@@ -139,22 +122,6 @@ This design is documented in detail [here](https://github.com/Azure/Enterprise-S
 | ARS1 | 1/ propagate the default route + the AVS ranges learnt from the AVS NVA to the On-Prem over ER and to the Spoke VNETs (with Next-Hop = AzFW), 2/ advertise the OnPrem + the H&S VNET ranges to the FW NVA |
 |ARS2 | 1/ propagate the default route + the On-Prem + the H&S VNET ranges to AVS, 2/ advertise the AVS ranges to the AVS NVA |
 
-The AVS NVA will:
-1. originate and advertise the default route
-2. learn the AVS ranges from ARS2 and forward them to ARS1
-3. for these routes, [the Next-Hop is updated](https://learn.microsoft.com/en-us/azure/route-server/next-hop-ip) to be the Azure Firewall
-4. forward the On-Prem and H&S VNET ranges to ARS2 (the Next-Hop remains unchanged and will be the AVS NVA NIC facing the ARS).
-
 :arrow_right: **a 0/0 UDR pointing to the AzFW** for the internet connectivity and GW route propagation disabled are required on the AVS NVA NIC to ARS1.
 
-ARS1 will:
-1. propagate the default route + the AVS ranges learnt from the AVS NVA:
-    - to the On-Prem over ER
-    - to the Spoke VNETs (with Next-Hop = AzFW)
-2. advertise the OnPrem + the hub and spoke VNET ranges to the AVS NVA
-
-ARS2 will:
-1. propagate the default route + the On-Prem + the H&S VNET ranges to AVS
-2. advertise the AVS ranges to the AVS NVA
-
-:arrow_right: UDRs towards the AVS ranges will be required on the Hub VNet GW subnet to force the On-Prem traffic to AVS through the AzFW.
+:arrow_right: UDRs towards the AVS ranges must be configured on the Hub VNet GW subnet to force the On-Prem traffic to AVS through the AzFW.
