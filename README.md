@@ -24,13 +24,21 @@ This repo is about summarising the 2 sets of designs available for option 1 in a
 ##
 # 1. Single Hub VNET design
 
-On-Prem to AVS is managed via Global Reach when available*, with an On-Prem FW for filtering/inspection if needed.
+On-Prem to AVS is managed via Global Reach when available*, with an On-Prem FW for filtering/inspection if needed. 
 
-All the other flows are sent through the FW: Spoke to Spoke, On-Prem to Spokes and Spoke to AVS. 
+\* *In section 1.3. we will see how this current desig ncan be adapted to provide [On-Prem to AVS transit](https://www.youtube.com/watch?v=x32SNdEaf-Q)*
 
-\* *As explained by Adam, this design can offer [On-Prem to AVS transit](https://www.youtube.com/watch?v=x32SNdEaf-Q) should GR not be available*
+All the other flows are sent through the FW: Spoke to Spoke, On-Prem to Spokes and Spoke to AVS:
+| traffic | inspection |
+|---|---|
+| Spoke <-> AVS | via AzFW |
+| AVS to Internet | via AzFW |
+| OnPrem <-> AVS | via GR |
+| Spoke to Spoke | via AzFW |
+| Spoke to Internet | via AzFW |
+| Spoke <-> OnPrem | via AzFW |
 
-:arrow_right: In this design, the ARS **only** purpose is to push the default route to AVS.
+:arrow_right: In the no GR design, the ARS **only** purpose is to push the default route to AVS.
 
 :arrow_right: Disabling *GW route propagation* on a subnet removes the routes programmed by ARS on that subnet: the default route to the FW needs to be enforced with a UDR on the Spokes.
 
@@ -40,7 +48,7 @@ All the other flows are sent through the FW: Spoke to Spoke, On-Prem to Spokes a
 
 :warning: Make sure to disable GW route propagation on the internet facing NIC of the FW, to avoid a routing loop.
 
-<img width="911" alt="image" src="https://user-images.githubusercontent.com/110976272/223410598-48f07499-b564-4baa-8488-12fe112b57d8.png">
+<img width="876" alt="image" src="https://user-images.githubusercontent.com/110976272/223509584-28517c8d-7ece-49e3-b7b3-a9ff9d3040a2.png">
 
 ## 1.2. Single Hub VNET & Azure FW
 
@@ -50,7 +58,19 @@ As the Azure Firewall doesn't speak BGP, a routing NVA* is added to advertise th
 
 This design is also detailed in this [Adam video](https://youtu.be/8CPghVFIR9Q?t=335).
 
-<img width="911" alt="image" src="https://user-images.githubusercontent.com/110976272/223411045-f0d10635-8010-41f8-b2b2-cf622aa04461.png">
+<img width="936" alt="image" src="https://user-images.githubusercontent.com/110976272/223523069-7475ff01-b69c-4d9c-9914-ccaf4b5670f7.png">
+
+## 1.3. Single Hub VNET & no Global Reach
+
+When Global Reach is not available, Transit can be achieved via the FW in the Hub VNet by configuring additional static routes and UDRs:
+
+- Static routes (could be a supernet) for the AVS ranges to b propagated On-Prem (the On-Prem reachability from AVS is covered by the default route).
+- UDRs on the GW subnet to force both the AVS and On-Prem traffic through the FW
+
+FW NVA design:
+
+<img width="873" alt="image" src="https://user-images.githubusercontent.com/110976272/223527462-e6b085ff-e988-431f-b4d4-c54d9e908d09.png">
+
 
 # 2. Hub VNET + AVS Transit VNET design
 
