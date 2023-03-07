@@ -58,7 +58,7 @@ This design is also detailed in this [Adam video](https://youtu.be/8CPghVFIR9Q?t
 
 ## 1.3. Single Hub VNET without Global Reach
 
-When Global Reach is not available, Transit can be achieved via the FW in the Hub VNet by configuring additional static routes and UDRs:
+When Global Reach is not available, Transit can be achieved via the FW in the Hub VNet by configuring additional static routes and UDRs (highlighted on the diagrams below):
 
 - NVA: static routes (could be a supernet) for the AVS ranges to be propagated On-Prem by the ARS.
 - (The On-Prem reachability from AVS is covered by the default route)
