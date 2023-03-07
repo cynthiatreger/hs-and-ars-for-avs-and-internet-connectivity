@@ -88,7 +88,7 @@ This design provides On-Prem to AVS transit capalitites by default. However, whe
 
 <img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/223567625-f1d9e591-b658-4b9f-8ad1-2f34f426e468.png">
 
-| resource | actions |
+| resources | actions |
 | - | - |
 | FW NVA | 1/ originate and advertise the default route, 2/ forward the AVS ranges to ARS1, 3/ forward the On-Prem and H&S VNET ranges to the AVS NVA |
 |AVS NVA |1/ advertise the AVS ranges to the FW NVA, 2/ forward the On-Prem and H&S VNET ranges to ARS2 | 
@@ -116,7 +116,7 @@ This design is documented in detail [here](https://github.com/Azure/Enterprise-S
 
 <img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/223567999-a4ddd144-518b-4f73-9452-9ef1ed7f1093.png">
 
-| resource | actions |
+| resources | actions |
 | - | - |
 | AVS NVA | 1/ originate and advertise the default route, 2/ learn the AVS ranges from ARS2 and forward them to ARS1, 3/ for these routes, [the Next-Hop is updated](https://learn.microsoft.com/en-us/azure/route-server/next-hop-ip) to be the Azure Firewall, 4/ forward the On-Prem and H&S VNET ranges to ARS2 (the Next-Hop remains unchanged and will be the AVS NVA NIC facing the ARS). |
 | ARS1 | 1/ propagate the default route + the AVS ranges learnt from the AVS NVA to the On-Prem over ER and to the Spoke VNETs (with Next-Hop = AzFW), 2/ advertise the OnPrem + the H&S VNET ranges to the FW NVA |
