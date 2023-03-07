@@ -86,7 +86,7 @@ This design provides On-Prem to AVS transit capalitites by default. However, whe
 
 ## 2.1. HUB VNET + AVS TRANSIT VNET and NVAs
 
-<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/223564064-2c06b8a4-8da6-4299-85fb-2c08d434c3af.png">
+<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/223567625-f1d9e591-b658-4b9f-8ad1-2f34f426e468.png">
 
 | resource | actions |
 | - | - |
@@ -114,7 +114,7 @@ For reasons already discussed in a previous [article](https://github.com/cynthia
 
 This design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach) and is useful when the FW doesn't speak BGP, like the Azure Firewall.
 
-<img width="1132" alt="image" src="https://user-images.githubusercontent.com/110976272/223564401-30198cff-c42c-402b-bad0-a0041f29519c.png">
+<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/223567770-a6966d8f-a826-4d89-9dbd-ad5242386fb0.png">
 
 | resource | actions |
 | - | - |
