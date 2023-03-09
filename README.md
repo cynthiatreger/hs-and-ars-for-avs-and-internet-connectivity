@@ -1,4 +1,4 @@
-# Transit and Internet connectivity for AVS with ARS
+# H&S topologies with ARS for AVS transit and internet breakout
 
 This article aims at summarising the sets of designs available for AVS connectivity filtered by a Firewall (3P FW or Azure Firewall), also providing internet breakout, in a Hub and Spoke topology.
 
