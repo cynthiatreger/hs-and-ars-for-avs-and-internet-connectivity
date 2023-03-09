@@ -98,11 +98,11 @@ This design provides On-Prem to AVS transit capalitites by default. However, whe
 :arrow_right: Internet connectivity can be provided either by the FW NIC facing the AVS NVA or a 3rd dedicated NIC on the FW NVA. GW route propagation should be disabled for that NIC.
 
 2 options for the FW NVA to AVS NVA transit:
-1. UDRs 
+1. **UDRs**
     - on the FW NVA NIC to AVS VNET: AVS ranges to the AVS NVA NIC, 
     - on the AVS NVA NIC to the Hub VNet: 0/0 to the FW NVA NIC
     - disable GW route propagation on these 2 NICs
-2. BGP over IPSec/VxLAN if the granularity of the AVS and/or OnPrem routes are required
+2. **BGP over IPSec/VxLAN** if the granularity of the AVS and/or OnPrem routes are required
 
 :arrow_right: If stateful, the NVA instances should be configured as Active/Standby to avoid asymmetric routing. 
 
