@@ -13,6 +13,8 @@ There are 3 options to provide [internet breakout to AVS](https://learn.microsof
 
 3. Via [AVS managed SNAT solution](https://learn.microsoft.com/en-us/azure/azure-vmware/enable-managed-snat-for-workloads) (SNAT through an AVS NAT GW) 
 
+![avs-internet-connectivity-settings](https://user-images.githubusercontent.com/110976272/224350509-83e7d75d-5880-4385-8831-87b1b05827a9.png)
+
 With the exception of section xx, this repo is about option 1: how to leverage an Azure Firewall or a FW NVA already used for inspection in the context of the Azure VNets environment to provide both internet breakout and optionally inspection for AVS flows (when GR is not available or appropriate).
 
 These designs The AVS traffic is inspected by a Firewall in an Azure VNet 
@@ -62,7 +64,7 @@ In section 1.3. we will see how this design can be adapted to offer On-Prem <=> 
 
 :warning: Make sure to disable GW route propagation on the internet facing NIC of the FW NVA, to avoid a routing loop.
 
-<img width="876" alt="image" src="https://user-images.githubusercontent.com/110976272/223509584-28517c8d-7ece-49e3-b7b3-a9ff9d3040a2.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224343018-be509a53-f25e-4c8c-b022-52921d867896.png">
 
 ## 1.2. Single Hub VNet with Azure Firewall
 
@@ -70,7 +72,7 @@ As the Azure Firewall doesn't speak BGP, a routing NVA is added to advertise the
 
 This design leverages the [Next-hop IP feature](https://learn.microsoft.com/en-us/azure/route-server/next-hop-ip) supported by the ARS and that allows the NVA to set the Next-Hop of the route advertised to be the AzFW.
 
-<img width="936" alt="image" src="https://user-images.githubusercontent.com/110976272/223523069-7475ff01-b69c-4d9c-9914-ccaf4b5670f7.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224343211-9dd4e486-22eb-47c3-a3c2-f8f9a5454ac0.png">
 
 ## 1.3. Single Hub VNet without Global Reach
 
@@ -84,7 +86,7 @@ Without Global Reach, as explained in this [Adam video](https://www.youtube.com/
 
 ### FW NVA design (design 1.1 bis):
 
-<img width="873" alt="image" src="https://user-images.githubusercontent.com/110976272/223527462-e6b085ff-e988-431f-b4d4-c54d9e908d09.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224344449-7d546939-9bdb-4941-bbf2-f1d1161a5ea3.png">
 
 The design is also documented on the followoing links
 - [internet breakout](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-network-design-considerations#default-route-to-azure-vmware-solution-for-internet-traffic-inspection) 
@@ -92,25 +94,25 @@ The design is also documented on the followoing links
 
 ### Azure FW design (design 1.2 bis)
 
-<img width="866" alt="image" src="https://user-images.githubusercontent.com/110976272/223563152-1afdd727-1907-4ecb-9471-f0b08e0b13d1.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224344709-d86dce38-f51d-41fd-ae7f-3b46bb62e2e6.png">
 
 This design is also detailed in this [other Adam video](https://youtu.be/8CPghVFIR9Q?t=335).
 
 # 2. Hub VNet + AVS transit VNet architecture (without Global Reach)
 
-This approach is considered as an alternative to designs 1.1 bis and 1.2 bis, when Global Reach is either not supported 
-or not adapted to the customer requirements. 
+This approach is considered as an alternative to designs 1.1 bis and 1.2 bis (when Global Reach is either not supported 
+or not adapted to the customer requirements). 
 
 The 3 drivers for this architeture are the following:
-- keep the knowledge of the AVS/On-Prem route granularity, for example during the AVS migration phase
-- avoid configuration maintenance complexity
-- have the ability if needed/preferred to bypass FW inspection for Spokes <=> On-Prem connectivity*, while mandatory in the single hub design.
+- keeping the knowledge of the AVS/On-Prem route granularity, for example during the AVS migration phase
+- avoiding configuration maintenance complexity
+- having the ability if needed/preferred to bypass FW inspection for Spokes <=> On-Prem connectivity*, while mandatory in the single hub design.
 
 \* *If Spoke <=> On-Prem filtering is not needed, disabling *GW route propagation* on the Spoke subnets is no longer required.
 
 ## 2.1. HUB VNet + AVS transit VNet and NVAs
 
-<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/223567625-f1d9e591-b658-4b9f-8ad1-2f34f426e468.png">
+<img width="1122" alt="image" src="https://user-images.githubusercontent.com/110976272/224349600-6b791e4d-5797-4420-9ec3-14b1be04af5d.png">
 
 | resources | actions |
 | - | - |
@@ -138,7 +140,7 @@ For reasons already discussed in a previous [article](https://github.com/cynthia
 
 This design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach) and is useful when the FW doesn't speak BGP, like the Azure Firewall.
 
-<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/223567999-a4ddd144-518b-4f73-9452-9ef1ed7f1093.png">
+<img width="1120" alt="image" src="https://user-images.githubusercontent.com/110976272/224350110-472a815d-1ff0-4576-a1d5-ee55e9097578.png">
 
 | resources | actions |
 | - | - |
