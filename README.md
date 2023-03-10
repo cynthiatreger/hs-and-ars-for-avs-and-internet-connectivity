@@ -5,7 +5,7 @@ The goal of this article is to list the architectures and designs addressing the
 - AVS <=> Spokes
 - AVS to Internet
 
-There are 3 options to provide [internet breakout to AVS](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-design-public-internet-access):
+As represented on the screenshot below, there are 3 options to provide [internet breakout to AVS](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-design-public-internet-access):
 
 1. **via an Azure Firewall or FW NVA already hosted in Azure**
 
