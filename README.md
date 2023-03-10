@@ -31,15 +31,13 @@ Most of these designs are already documented across multiple sources that are
 
 &emsp;&emsp;&emsp;[FW NVA (DESIGN 1.1 bis)]
 
-&emsp;&emsp;&emsp;[Azure FW (DESIGN 1.2 bis)]
+&emsp;&emsp;&emsp;[AZURE FW (DESIGN 1.2 bis)]
 
 [2. HUB VNET AND AVS TRANSIT VNET ARCHITECTURE (WITHOUT GLOBAL REACH)](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#2-hub-vnet--avs-transit-vnet-design)
 
 &emsp;[2.1. HUB VNET AND AVS TRANSIT VNET WITH NVAs](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#21-hub-vnet--avs-transit-vnet-and-nvas)
 
 &emsp;[2.2. HUB VNET AND AVS TRANSIT VNET WITH AZURE FIREWALL](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#22-hub-vnet-avs-transit-vnet-and-azure-firewall)
-
-[3. PERSPECTIVES]()
 ##
 # 1. Single Hub VNet architecture
 
