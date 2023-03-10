@@ -101,7 +101,7 @@ The 3 drivers for this architeture are the following:
 
 ## 2.1. HUB VNet + AVS transit VNet and NVAs
 
-<img width="1122" alt="image" src="https://user-images.githubusercontent.com/110976272/224349600-6b791e4d-5797-4420-9ec3-14b1be04af5d.png">
+<img width="1128" alt="image" src="https://user-images.githubusercontent.com/110976272/224393137-6ddcdbd7-d3fa-48b6-bf1b-3527c84be694.png">
 
 | resources | actions |
 | - | - |
@@ -129,7 +129,7 @@ For reasons already discussed in a previous [article](https://github.com/cynthia
 
 This design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach) and is useful when the FW doesn't speak BGP, like the Azure Firewall.
 
-<img width="1120" alt="image" src="https://user-images.githubusercontent.com/110976272/224350110-472a815d-1ff0-4576-a1d5-ee55e9097578.png">
+<img width="1126" alt="image" src="https://user-images.githubusercontent.com/110976272/224393452-f73b8167-43d1-4a8f-861e-4a8358192118.png">
 
 | resources | actions |
 | - | - |
