@@ -21,23 +21,23 @@ with the requirement of having AVS traffic inspected by a FW in an Azure VNet al
 Most of these designs are already documented across multiple sources that are 
 
 
-[1. SINGLE HUB VNET ARCHITECTURE](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#1-single-hub-vnet-design)
+[1. SINGLE HUB VNET ARCHITECTURE](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#1-single-hub-vnet-architecture)
 
-&emsp;[1.1. SINGLE HUB VNET WITH FW NVA](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#11-single-hub-vnet-and-fw-nva)
+&emsp;[1.1. SINGLE HUB VNET WITH FW NVA](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#11-single-hub-vnet-with-fw-nva)
 
-&emsp;[1.2. SINGLE HUB VNET WITH AZURE FIREWALL](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#12-single-hub-vnet-and-azure-firewall)
+&emsp;[1.2. SINGLE HUB VNET WITH AZURE FIREWALL](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#12-single-hub-vnet-with-azure-firewall)
 
-&emsp;[1.3. SINGLE HUB VNET WITHOUT GLOBAL REACH](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#13-single-hub-vnet-without-global-reach)
+&emsp;[1.3. SINGLE HUB VNET WITHOUT GLOBAL REACH](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#13-single-hub-vnet-without-global-reach)
 
-&emsp;&emsp;&emsp;[FW NVA (DESIGN 1.1 bis)]
+&emsp;&emsp;&emsp;[FW NVA (DESIGN 1.1 bis)](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#fw-nva-design-design-11-bis)
 
-&emsp;&emsp;&emsp;[AZURE FW (DESIGN 1.2 bis)]
+&emsp;&emsp;&emsp;[AZURE FW (DESIGN 1.2 bis)](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#azure-fw-design-design-12-bis)
 
-[2. HUB VNET AND AVS TRANSIT VNET ARCHITECTURE (WITHOUT GLOBAL REACH)](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#2-hub-vnet--avs-transit-vnet-design)
+[2. HUB VNET AND AVS TRANSIT VNET ARCHITECTURE (WITHOUT GLOBAL REACH)](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#2-hub-vnet--avs-transit-vnet-architecture-without-global-reach)
 
-&emsp;[2.1. HUB VNET AND AVS TRANSIT VNET WITH NVAs](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#21-hub-vnet--avs-transit-vnet-and-nvas)
+&emsp;[2.1. HUB VNET AND AVS TRANSIT VNET WITH NVAs](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#21-hub-vnet--avs-transit-vnet-and-nvas)
 
-&emsp;[2.2. HUB VNET AND AVS TRANSIT VNET WITH AZURE FIREWALL](https://github.com/cynthiatreger/transit-and-internet-for-avs-with-ars#22-hub-vnet-avs-transit-vnet-and-azure-firewall)
+&emsp;[2.2. HUB VNET AND AVS TRANSIT VNET WITH AZURE FIREWALL](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#22-hub-vnet-avs-transit-vnet-and-azure-firewall)
 ##
 # 1. Single Hub VNet architecture
 
