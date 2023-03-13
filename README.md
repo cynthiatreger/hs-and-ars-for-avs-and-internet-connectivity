@@ -81,13 +81,13 @@ Without Global Reach, as explained in this [video](https://www.youtube.com/watch
 
 > The [internet breakout](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-network-design-considerations#default-route-to-azure-vmware-solution-for-internet-traffic-inspection) and [transit with a supernet design topology](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-network-design-considerations#connectivity-between-azure-vmware-solution-and-an-on-premises-network) designs are publicly documented on the referenced links.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224344449-7d546939-9bdb-4941-bbf2-f1d1161a5ea3.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224705028-9100ca37-aad3-45f4-9141-1f9d519334b0.png">
 
 ### Azure FW design (design 1.2 bis)
 
 > Details of this design can be found in this [video](https://youtu.be/8CPghVFIR9Q?t=335) shared by Adam.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224344709-d86dce38-f51d-41fd-ae7f-3b46bb62e2e6.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224705248-487701f0-26da-49d9-a138-846e4afa4043.png">
 
 # 2. Hub VNet + AVS transit VNet architecture (without Global Reach)
 
