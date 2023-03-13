@@ -39,7 +39,7 @@ Most of these designs are already documented across multiple sources and have be
 ##
 # 1. Single Hub VNet architecture
 
-With this architecture, all the flows are sent through the FW for inspection: Spoke<=>Spoke, Spoke<=>On-Prem, Spoke<=>AVS, On-Prem<=>AVS (when Global Reach is not used).
+With this architecture, all the flows are sent through the FW for inspection: Spoke <=> Spoke, Spoke <=> On-Prem, Spoke <=> AVS, On-Prem <=> AVS (when Global Reach is not used).
 
 Key deployment elements:
 
@@ -49,7 +49,7 @@ Key deployment elements:
 
 :arrow_right: VNet peering routes are preferred over ARS propagated routes (even if ARS routes are more specific): UDRs on the GW subnet are required to force the traffic to the Spoke VNets through the FW.
 
-In [section 1.3.](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#13-single-hub-vnet-without-global-reach) we will see how this design can be adapted to offer On-Prem <=> AVS transit and filtering capabilities when [Global Reach is not available](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-global-reach#availability) or not aligned with the customer requirements (On-Prem <=> AVS traffic inspected by a FW in an Azure VNet).
+In [section 1.3.](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#13-single-hub-vnet-without-global-reach) we will see how this design can be adapted to offer On-Prem <=> AVS transit and filtering capabilities when [Global Reach is not available](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-global-reach#availability) or not aligned with the customer requirements (On-Prem <=> AVS traffic required to be inspected by a FW in an Azure VNet).
 
 ## 1.1. Single Hub VNet with FW NVA
 
