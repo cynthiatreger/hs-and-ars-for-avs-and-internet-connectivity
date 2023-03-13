@@ -59,7 +59,7 @@ In [section 1.3.](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-intern
 
 ## 1.2. Single Hub VNet with Azure Firewall
 
-As the Azure Firewall doesn't speak BGP, a routing NVA is added to advertise the default route to the ARS for further propagation. This routing NVA is here only to generate the default route and won't be in the data path
+As the Azure Firewall doesn't speak BGP, a routing NVA is added to advertise the default route to the ARS for further propagation. This routing NVA is here only to generate the default route and won't be in the data path.
 
 :arrow_right: This design leverages the [Next-hop IP feature](https://learn.microsoft.com/en-us/azure/route-server/next-hop-ip) supported by the ARS and that allows the NVA to set the Next-Hop of the route advertised to be the AzFW.
 
@@ -69,9 +69,11 @@ As the Azure Firewall doesn't speak BGP, a routing NVA is added to advertise the
 
 Without Global Reach, as explained in this [video](https://www.youtube.com/watch?v=x32SNdEaf-Q) by Adam, On-Prem <=> AVS transit can be achieved via the FW in the Hub VNet by configuring additional static routes and UDRs (highlighted on the diagrams below):
 
-- NVA: static routes (usually a supernet) for the AVS ranges to be propagated On-Prem by the ARS.
-- (The On-Prem reachability from AVS is covered by the default route, or a specific On-Prem supernet could be statically configured on the NVA and advertised to the ARS.)
-- Specific UDRs on the GW subnet to force both the AVS and On-Prem traffic through the FW.
+- NVA: static routes towards the ARS facing NIC for the AVS ranges to be propagated On-Prem by the ARS. These static routes MUST be spernets of the sêcifc AVS ranges to avoid a routing loop.
+- (The On-Prem reachability from AVS is covered by the default route, or an On-Prem supernet could be statically configured on the NVA and advertised to the ARS.)
+- UDRs on the GW subnet to force both the AVS and On-Prem traffic through the FW. These UDRs MUST **specifically** match the On-Prem and AVS ranges.*
+
+\* *The max number of UDRs in an Azure Route table is 400, ie: this design doesn't scale for scenarios where the (# of advertised On-Prem prefixes) > 400 - (# of AVS ranges) - (# Spoke ranges).*
 
 :arrow_right: Here the role of the ARS is to both push the default route to AVS and enable the On-Prem <=> AVS transit.
 
@@ -92,7 +94,8 @@ Without Global Reach, as explained in this [video](https://www.youtube.com/watch
 This approach is an alternative to [design 1.1 bis](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#fw-nva-design-design-11-bis) and [design 1.2 bis](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-internet-connectivity/blob/main/README.md#azure-fw-design-design-12-bis) (when Global Reach is either not supported 
 or not adapted to the customer requirements). 
 
-The 3 drivers for this architeture are the following:
+The 4 drivers for this architeture are the following:
+- unblocking scenarios in which there are thousands of On-Prem prefixes
 - keeping the knowledge of the AVS/On-Prem route granularity, for example during the AVS migration phase
 - avoiding configuration maintenance complexity
 - having the ability if needed/preferred to bypass FW inspection for Spokes <=> On-Prem connectivity*, while mandatory in the single hub design.
