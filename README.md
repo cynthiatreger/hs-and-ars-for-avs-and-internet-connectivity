@@ -73,7 +73,7 @@ Without Global Reach, as explained in this [video](https://www.youtube.com/watch
 - (The On-Prem reachability from AVS is covered by the default route, or an On-Prem supernet could be statically configured on the NVA and advertised to the ARS.)
 - UDRs on the GW subnet to force both the AVS and On-Prem traffic through the FW. These UDRs MUST **specifically** match the On-Prem and AVS ranges.*
 
-\* *The max number of UDRs in an Azure Route table is 400, ie: this design doesn't scale for scenarios where the (# of advertised On-Prem prefixes) > 400 - (# of AVS ranges) - (# Spoke ranges).*
+\* *The max number of UDRs in an Azure Route table is 400, ie: this design doesn't scale for scenarios where the (# of advertised On-Prem prefixes) > 400 - (# of AVS ranges) - (# of Spoke ranges).*
 
 :arrow_right: Here the role of the ARS is to both push the default route to AVS and enable the On-Prem <=> AVS transit.
 
