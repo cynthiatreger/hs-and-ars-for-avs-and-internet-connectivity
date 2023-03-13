@@ -15,7 +15,7 @@ As represented on the screenshot below, there are 3 options to provide [internet
 
 ![avs-internet-connectivity-settings](https://user-images.githubusercontent.com/110976272/224350509-83e7d75d-5880-4385-8831-87b1b05827a9.png)
 
-This repo is about option 1 and how to leverage an Azure Firewall or a FW NVA already used in an Azure VNets environment and extend it to AVS inspection and AVS internet connectivity.
+This repo is about option 1 and how to leverage an Azure Firewall or a FW NVA already used in an Azure VNet environment and extend it to AVS inspection and AVS internet connectivity.
 
 Most of these designs are already documented across multiple sources and have been referenced accordingly in this article.
 
@@ -39,7 +39,7 @@ Most of these designs are already documented across multiple sources and have be
 ##
 # 1. Single Hub VNet architecture
 
-With this architecture, all the flows are sent through the FW for inspection: Spoke <=> Spoke, Spokes <=> On-Prem, Spoke <=> AVS, On-Prem <=> AVS (when Global Reach is not used).
+With this architecture, all the flows are sent through the FW for inspection: Spoke<=>Spoke, Spoke<=>On-Prem, Spoke<=>AVS, On-Prem<=>AVS (when Global Reach is not used).
 
 Key deployment elements:
 
@@ -53,7 +53,7 @@ In [section 1.3.](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-intern
 
 ## 1.1. Single Hub VNet with FW NVA
 
-:warning: Make sure to disable GW route propagation on the internet facing NIC of the FW NVA, to avoid a routing loop.
+:warning: Make sure to disable GW route propagation on the internet facing NIC of the FW NVA, to avoid a routing loop (addressed in a futur article).
 
 <img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224343018-be509a53-f25e-4c8c-b022-52921d867896.png">
 
