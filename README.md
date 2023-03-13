@@ -69,7 +69,7 @@ As the Azure Firewall doesn't speak BGP, a routing NVA is added to advertise the
 
 Without Global Reach, as explained in this [video](https://www.youtube.com/watch?v=x32SNdEaf-Q) by Adam, On-Prem <=> AVS transit can be achieved via the FW in the Hub VNet by configuring additional static routes and UDRs (highlighted on the diagrams below):
 
-- NVA: static routes towards the ARS facing NIC for the AVS ranges to be propagated On-Prem by the ARS. These static routes MUST be spernets of the sêcifc AVS ranges to avoid a routing loop.
+- NVA: static routes towards the ARS facing NIC for the AVS ranges to be propagated On-Prem by the ARS. These static routes MUST be **supernets** of the specific AVS ranges to avoid a routing loop.
 - (The On-Prem reachability from AVS is covered by the default route, or an On-Prem supernet could be statically configured on the NVA and advertised to the ARS.)
 - UDRs on the GW subnet to force both the AVS and On-Prem traffic through the FW. These UDRs MUST **specifically** match the On-Prem and AVS ranges.*
 
