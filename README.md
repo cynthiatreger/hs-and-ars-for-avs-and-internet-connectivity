@@ -73,7 +73,7 @@ Without Global Reach, as explained in this [video](https://www.youtube.com/watch
 - (The On-Prem reachability from AVS is covered by the default route, or, like for AVS, an On-Prem supernet could be statically configured on the NVA and advertised to the ARS.)
 - UDRs on the GW subnet to force both the AVS and On-Prem traffic through the FW. These UDRs MUST **specifically** match the On-Prem and AVS ranges.*
 
-\* *The max number of UDRs in an Azure Route table is 400, ie: this design doesn't scale for scenarios where the (# of advertised On-Prem prefixes) > 400 - (# of AVS ranges) - (# of Spoke ranges).*
+\* *The max number of UDRs in an Azure Route table is 400, ie: this architecture doesn't scale for scenarios where the (# of advertised On-Prem prefixes) > 400 - (# of AVS ranges) - (# of Spoke ranges).*
 
 :arrow_right: Here the role of the ARS is to both push the default route to AVS and enable the On-Prem <=> AVS transit.
 
@@ -95,7 +95,7 @@ This approach is an alternative to [design 1.1 bis](https://github.com/cynthiatr
 or not adapted to the customer requirements). 
 
 The 4 drivers for this architeture are the following:
-- unblocking scenarios in which there are thousands of On-Prem prefixes
+- unblocking On-Prem <=> AVS transit scenarios (when GR is not available/adapted) in which there are thousands of On-Prem prefixes
 - keeping the knowledge of the AVS/On-Prem route granularity, for example during the AVS migration phase
 - avoiding configuration maintenance complexity
 - having the ability if needed/preferred to bypass FW inspection for Spokes <=> On-Prem connectivity*, while mandatory in the single hub design.
