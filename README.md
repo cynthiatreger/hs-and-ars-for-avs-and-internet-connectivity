@@ -136,20 +136,18 @@ For reasons already discussed in a previous [article](https://github.com/cynthia
 
 ## 2.2. HUB VNet, AVS transit VNet and Azure Firewall
 
-> This design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach) and is useful when the FW doesn't speak BGP, like the Azure Firewall.
+> A similar design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach) and is useful when the FW doesn't speak BGP, like the Azure Firewall.
 
-<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/225101835-d35d9384-18eb-4b14-b37f-5a77f082097c.png">
+<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/225104669-df0e28a6-7675-4e78-964b-fce0a22c0820.png">
 
 | resources | actions |
 | - | - |
-| AVS NVA | 1/ originates and advertises the default route, 2/ for this default route the [Next-Hop](https://learn.microsoft.com/en-us/azure/route-server/next-hop-ip) is updated to be the Azure Firewall*, 3/ learns the AVS ranges from ARS2 and forwards them to ARS1,  3/ for these routes, the [Next-Hop](https://learn.microsoft.com/en-us/azure/route-server/next-hop-ip) is updated to be the Azure Firewall*, 4/ forwards the On-Prem and H&S VNet ranges to ARS2 (the Next-Hop remains unchanged and will be the AVS NVA NIC facing ARS2). |
+| AVS NVA | 1/ originates and advertises the default route, 2/ learns the AVS ranges from ARS2 and forwards them to ARS1,  3/ for these routes, the [Next-Hop](https://learn.microsoft.com/en-us/azure/route-server/next-hop-ip) is updated to be the Azure Firewall*, 4/ forwards the On-Prem and H&S VNet ranges to ARS2 (the Next-Hop remains unchanged and will be the AVS NVA NIC facing ARS2). |
 | ARS1 | 1/ propagates the default route + the AVS ranges learnt from the AVS NVA to the On-Prem over ER and to the Spoke VNets (with Next-Hop = AzFW), 2/ advertises the OnPrem + the H&S VNet ranges to the FW NVA |
 |ARS2 | 1/ propagates the default route + the On-Prem + the H&S VNet ranges to AVS, 2/ advertises the AVS ranges to the AVS NVA |
 
-\* :warning: For the same reason that in the 1.2 and 1.2bis designs (avoid a routing loop on the AzFW), make sure to enforce a 0/0 UDR on the AzFW subnet.
+\* :warning: For the same reason that in the 1.2 and 1.2bis designs (avoid a routing loop on the AzFW), make sure to enforce UDRs on the AzFW subnet: 0/0 to Internet, the AVS ranges to the AVS NVA.
 
 :arrow_right: **A 0/0 UDR pointing to the AzFW** for internet **and On-Prem** connectivity is required on the AVS NVA NIC facing ARS1 (ARS1 advertises the On-Prem prefixes to the AVS NVA via BGP but these prefixes are not enforced on the AVS NVA NIC because GW Transit is disabled between the Hub VNnet and AVS transit VNet). 
 
 :arrow_right: In addition, *GW route propagation* must be disabled on the AVS NVA NIC to ARS1 to avoid the routing loop that would be programmed by ARS2.
-
-:arrow_right: UDRs towards the AVS ranges must be configured on the Hub VNet GW subnet to force the On-Prem traffic to AVS through the AzFW.
