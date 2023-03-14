@@ -65,7 +65,7 @@ As the Azure Firewall doesn't speak BGP, a routing NVA is added to advertise the
 
 :warning: Make sure to enforce a 0/0 UDR on the AzFW subnet to avoid the routing loop that would be programmed by ARS otherwise.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225082033-ee98b221-5d90-433c-a9c2-81f973db3f2a.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225095220-87173c71-3781-4bc5-9349-dc3d97b49705.png">
 
 ## 1.3. Single Hub VNet without Global Reach
 
@@ -83,13 +83,13 @@ Without Global Reach, as explained in this [video](https://www.youtube.com/watch
 
 > The [internet breakout](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-network-design-considerations#default-route-to-azure-vmware-solution-for-internet-traffic-inspection) and [transit with a supernet design topology](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-network-design-considerations#connectivity-between-azure-vmware-solution-and-an-on-premises-network) designs are publicly documented on the referenced links.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224705028-9100ca37-aad3-45f4-9141-1f9d519334b0.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225096346-cbb15b33-c60f-485c-bf39-e48fa2770efa.png">
 
 ### Azure FW design (design 1.2 bis)
 
 > Details of this design can be found in this [video](https://youtu.be/8CPghVFIR9Q?t=335) shared by Adam.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224705248-487701f0-26da-49d9-a138-846e4afa4043.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225096813-7281670d-ecf8-43f8-97fd-ffb2060ec9c3.png">
 
 # 2. Hub VNet + AVS transit VNet architecture (without Global Reach)
 
@@ -108,7 +108,7 @@ The 4 drivers for this architeture are the following:
 
 > The public documentation for the transit design part is available on this [link](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-network-design-considerations#transit-spoke-virtual-network-topology).
 
-<img width="1128" alt="image" src="https://user-images.githubusercontent.com/110976272/224393137-6ddcdbd7-d3fa-48b6-bf1b-3527c84be694.png">
+<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/225099517-6f870cd7-4d29-471b-b9db-a5a97f9df13c.png">
 
 | resources | actions |
 | - | - |
@@ -117,7 +117,9 @@ The 4 drivers for this architeture are the following:
 | ARS1 | 1/ propagates the default route learnt from the FW NVA + the AVS ranges forwarded by the AVS NVA via the FW NVA to the On-Prem over ER and to the Spoke VNets, 2/ advertises the OnPrem + the hub and spoke VNet ranges to the FW NVA |
 |ARS2 | 1/ propagates the default route + the On-Prem + the H&S VNet ranges to AVS, 2/ advertises the AVS ranges to the AVS NVA |
 
-:arrow_right: Internet connectivity can be provided either by the FW NIC facing the AVS NVA or a 3rd dedicated NIC on the FW NVA. *GW route propagation* should be disabled for that NIC.
+:arrow_right: Internet connectivity can be provided either by the FW NIC facing the AVS NVA or a 3rd dedicated NIC on the FW NVA. 
+
+:warning: *GW route propagation* should be disabled for that NIC.
 
 2 options for the FW NVA to AVS NVA transit:
 1. **UDRs**
