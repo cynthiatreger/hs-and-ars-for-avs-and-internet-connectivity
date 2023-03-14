@@ -75,7 +75,7 @@ Without Global Reach, as explained in this [video](https://www.youtube.com/watch
 
 \* *The max number of UDRs in an Azure Route table is 400, ie: this architecture doesn't scale for scenarios where the (# of advertised On-Prem prefixes) > 400 - (# of AVS ranges) - (# of Spoke ranges).*
 
-:arrow_right: Here the role of the ARS is to both push the default route to AVS and enable the On-Prem <=> AVS transit.
+:arrow_right: Here the role of the ARS is to push the default route to AVS and the AVS ranges to the On-Prem to enable the On-Prem <=> AVS transit.
 
 ### FW NVA design (design 1.1 bis):
 
