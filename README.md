@@ -146,8 +146,8 @@ For reasons already discussed in a previous [article](https://github.com/cynthia
 | ARS1 | 1/ propagates the default route + the AVS ranges learnt from the AVS NVA to the On-Prem over ER and to the Spoke VNets (with Next-Hop = AzFW), 2/ advertises the OnPrem + the H&S VNet ranges to the FW NVA |
 |ARS2 | 1/ propagates the default route + the On-Prem + the H&S VNet ranges to AVS, 2/ advertises the AVS ranges to the AVS NVA |
 
-\* :warning: For the same reason that in the 1.2 and 1.2bis designs (avoid a routing loop on the AzFW), make sure to enforce UDRs on the AzFW subnet: 0/0 to Internet, the AVS ranges to the AVS NVA.
+⚠️: \* For the same reason that in the 1.2 and 1.2bis designs (avoid a routing loop on the AzFW), make sure to ***enforce UDRs on the AzFW subnet***: 0/0 to Internet, the AVS ranges to the AVS NVA.
 
-:arrow_right: **A 0/0 UDR pointing to the AzFW** for internet **and On-Prem** connectivity is required on the AVS NVA NIC facing ARS1 (ARS1 advertises the On-Prem prefixes to the AVS NVA via BGP but these prefixes are not enforced on the AVS NVA NIC because GW Transit is disabled between the Hub VNnet and AVS transit VNet). 
+⚠️: ***GW route propagation*** must be disabled on the AVS NVA NIC to ARS1 to avoid the routing loop that would be programmed by ARS2.
 
-:arrow_right: In addition, *GW route propagation* must be disabled on the AVS NVA NIC to ARS1 to avoid the routing loop that would be programmed by ARS2.
+⚠️: **A 0/0 UDR pointing to the AzFW** for internet, Spoke and On-Prem connectivity is required on the AVS NVA NIC facing ARS1 (ARS1 advertises the On-Prem prefixes to the AVS NVA via BGP but these prefixes are not enforced on the AVS NVA NIC because GW Transit is disabled between the Hub VNnet and AVS transit VNet). 
