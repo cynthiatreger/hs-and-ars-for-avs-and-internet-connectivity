@@ -55,7 +55,7 @@ In [section 1.3.](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-intern
 
 :warning: Make sure to disable *GW route propagation* on the internet facing NIC of the FW NVA, to avoid a routing loop (to be addressed in a next article).
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224343018-be509a53-f25e-4c8c-b022-52921d867896.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225081425-ae24359a-812d-4379-a3c0-9781badd6ef6.png">
 
 ## 1.2. Single Hub VNet with Azure Firewall
 
@@ -65,7 +65,7 @@ As the Azure Firewall doesn't speak BGP, a routing NVA is added to advertise the
 
 :warning: Make sure to enforce a 0/0 UDR on the AzFW subnet to avoid the routing loop that would be programmed by ARS otherwise.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/224343211-9dd4e486-22eb-47c3-a3c2-f8f9a5454ac0.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225082033-ee98b221-5d90-433c-a9c2-81f973db3f2a.png">
 
 ## 1.3. Single Hub VNet without Global Reach
 
