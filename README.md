@@ -138,7 +138,7 @@ For reasons already discussed in a previous [article](https://github.com/cynthia
 
 > This design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach) and is useful when the FW doesn't speak BGP, like the Azure Firewall.
 
-<img width="1126" alt="image" src="https://user-images.githubusercontent.com/110976272/224393452-f73b8167-43d1-4a8f-861e-4a8358192118.png">
+<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/225101835-d35d9384-18eb-4b14-b37f-5a77f082097c.png">
 
 | resources | actions |
 | - | - |
