@@ -136,7 +136,9 @@ For reasons already discussed in a previous [article](https://github.com/cynthia
 
 ## 2.2. HUB VNet, AVS transit VNet and Azure Firewall
 
-> A similar design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach) and is useful when the FW doesn't speak BGP, like the Azure Firewall.
+This approach is useful when the FW doesn't speak BGP, like the Azure Firewall.
+
+> A similar design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach).
 
 <img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/225274924-f566f281-1479-48c9-8756-6b3aacee533f.png">
 
