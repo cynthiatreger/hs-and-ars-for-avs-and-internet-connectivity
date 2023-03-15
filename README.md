@@ -55,7 +55,7 @@ In [section 1.3.](https://github.com/cynthiatreger/hs-and-ars-for-avs-and-intern
 
 :warning: Make sure to disable *GW route propagation* on the internet facing NIC of the FW NVA, to avoid a routing loop (to be addressed in a next article).
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225081425-ae24359a-812d-4379-a3c0-9781badd6ef6.png">
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/110976272/225272362-b4432842-d676-4205-a562-b45efa5de610.png">
 
 ## 1.2. Single Hub VNet with Azure Firewall
 
@@ -65,7 +65,7 @@ As the Azure Firewall doesn't speak BGP, a routing NVA is added to advertise the
 
 :warning: Make sure to enforce a 0/0 UDR on the AzFW subnet to avoid the routing loop that would be programmed by ARS otherwise.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225095220-87173c71-3781-4bc5-9349-dc3d97b49705.png">
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/110976272/225272583-05a30a5d-1a8c-43e3-adc2-0548037f4ea5.png">
 
 ## 1.3. Single Hub VNet without Global Reach
 
@@ -83,13 +83,13 @@ Without Global Reach, as explained in this [video](https://www.youtube.com/watch
 
 > The [internet breakout](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-network-design-considerations#default-route-to-azure-vmware-solution-for-internet-traffic-inspection) and [transit with a supernet design topology](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-network-design-considerations#connectivity-between-azure-vmware-solution-and-an-on-premises-network) designs are publicly documented on the referenced links.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225096346-cbb15b33-c60f-485c-bf39-e48fa2770efa.png">
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/110976272/225272760-9bac034a-a115-4df7-851d-39428f23ed8f.png">
 
 ### Azure FW design (design 1.2 bis)
 
 > Details of this design can be found in this [video](https://youtu.be/8CPghVFIR9Q?t=335) shared by Adam.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/110976272/225096813-7281670d-ecf8-43f8-97fd-ffb2060ec9c3.png">
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/110976272/225273389-b21e1159-5c3f-484c-b5ea-5cdae5bceff3.png">
 
 # 2. Hub VNet + AVS transit VNet architecture (without Global Reach)
 
@@ -108,7 +108,7 @@ The 4 drivers for this architeture are the following:
 
 > The public documentation for the transit design part is available on this [link](https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-network-design-considerations#transit-spoke-virtual-network-topology).
 
-<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/225099517-6f870cd7-4d29-471b-b9db-a5a97f9df13c.png">
+<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/225274052-779f0bb5-2c34-4593-b4df-4d6b85b5958a.png">
 
 | resources | actions |
 | - | - |
@@ -138,7 +138,7 @@ For reasons already discussed in a previous [article](https://github.com/cynthia
 
 > A similar design is documented in detail [here](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/BrownField/Networking/Step-By-Step-Guides/Expressroute%20connectivity%20for%20AVS%20without%20Global%20Reach) and is useful when the FW doesn't speak BGP, like the Azure Firewall.
 
-<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/225107195-59603fef-acc7-4981-bdb4-f1eacf3cb55d.png">
+<img width="1125" alt="image" src="https://user-images.githubusercontent.com/110976272/225274924-f566f281-1479-48c9-8756-6b3aacee533f.png">
 
 | resources | actions |
 | - | - |
